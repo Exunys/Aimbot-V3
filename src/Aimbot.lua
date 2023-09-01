@@ -221,10 +221,10 @@ local Load = function()
 			GetClosestPlayer()
 
 			if Environment.Locked then
-				local LockedPosition_Vector3, LockedPosition = __index(__index(Environment.Locked, "Character")[LockPart], "Position"), Environment.LockedPosition
+				local LockedPosition_Vector3 = __index(__index(Environment.Locked, "Character")[LockPart], "Position")
 
 				if Environment.Settings.LockMode == 2 then
-					mousemoverel((LockedPosition.X - GetMouseLocation(UserInputService).X) * Settings.Sensitivity2, (LockedPosition.Y - GetMouseLocation(UserInputService).Y) * Settings.Sensitivity2)
+					mousemoverel((Environment.LockedPosition.X - GetMouseLocation(UserInputService).X) * Settings.Sensitivity2, (Environment.LockedPosition.Y - GetMouseLocation(UserInputService).Y) * Settings.Sensitivity2)
 				else
 					if Settings.Sensitivity > 0 then
 						Animation = TweenService:Create(Camera, TweenInfonew(Environment.Settings.Sensitivity, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {CFrame = CFramenew(Camera.CFrame.Position, LockedPosition_Vector3)})
