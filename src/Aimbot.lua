@@ -214,6 +214,7 @@ local Load = function()
 			SetRenderProperty(FOVCircleOutline, "Position", GetMouseLocation(UserInputService))
 		else
 			SetRenderProperty(FOVCircle, "Visible", false)
+			SetRenderProperty(FOVCircleOutline, "Visible", false)
 		end
 
 		if Running and Settings.Enabled then
