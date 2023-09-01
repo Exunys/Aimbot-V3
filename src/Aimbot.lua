@@ -129,7 +129,6 @@ end
 
 local CancelLock = function()
 	Environment.Locked = nil
-	Environment.LockedPosition = nil
 
 	local FOVCircle = UWP and Environment.FOVCircle or Environment.FOVCircle.__OBJECT
 
@@ -172,7 +171,7 @@ local GetClosestPlayer = function()
 				Distance = (GetMouseLocation(UserInputService) - Vector).Magnitude
 
 				if Distance < RequiredDistance and OnScreen then
-					RequiredDistance, Environment.Locked, Environment.LockedPosition = Distance, Value, Vector
+					RequiredDistance, Environment.Locked = Distance, Value
 				end
 			end
 		end
@@ -222,6 +221,7 @@ local Load = function()
 
 			if Environment.Locked then
 				local LockedPosition_Vector3 = __index(__index(Environment.Locked, "Character")[LockPart], "Position")
+				local LockedPosition = WorldToViewportPoint(Camera, LockedPosition_Vector3)
 
 				if Environment.Settings.LockMode == 2 then
 					mousemoverel((Environment.LockedPosition.X - GetMouseLocation(UserInputService).X) * Settings.Sensitivity2, (Environment.LockedPosition.Y - GetMouseLocation(UserInputService).Y) * Settings.Sensitivity2)
