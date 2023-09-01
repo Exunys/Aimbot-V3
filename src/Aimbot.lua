@@ -224,7 +224,7 @@ local Load = function()
 				local LockedPosition = WorldToViewportPoint(Camera, LockedPosition_Vector3)
 
 				if Environment.Settings.LockMode == 2 then
-					mousemoverel((Environment.LockedPosition.X - GetMouseLocation(UserInputService).X) * Settings.Sensitivity2, (Environment.LockedPosition.Y - GetMouseLocation(UserInputService).Y) * Settings.Sensitivity2)
+					mousemoverel((LockedPosition.X - GetMouseLocation(UserInputService).X) * Settings.Sensitivity2, (LockedPosition.Y - GetMouseLocation(UserInputService).Y) * Settings.Sensitivity2)
 				else
 					if Settings.Sensitivity > 0 then
 						Animation = TweenService:Create(Camera, TweenInfonew(Environment.Settings.Sensitivity, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {CFrame = CFramenew(Camera.CFrame.Position, LockedPosition_Vector3)})
