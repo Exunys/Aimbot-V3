@@ -10,7 +10,7 @@
 local game, workspace = game, workspace
 local getrawmetatable, getmetatable, setmetatable, pcall, getgenv, next, tick = getrawmetatable, getmetatable, setmetatable, pcall, getgenv, next, tick
 local Vector2new, CFramenew, Color3fromRGB, Color3fromHSV, Drawingnew, TweenInfonew = Vector2.new, CFrame.new, Color3.fromRGB, Color3.fromHSV, Drawing.new, TweenInfo.new
-local getupvalue, mousemoverel = debug.getupvalue, mousemoverel or (Input and Input.MouseMove)
+local getupvalue, mousemoverel, tablefind, stringlower, stringsub = debug.getupvalue, mousemoverel or (Input and Input.MouseMove), table.find, string.lower, string.sub
 
 local GameMetatable = getrawmetatable(game)
 local __index = GameMetatable.__index
@@ -28,7 +28,9 @@ local Camera = __index(workspace, "CurrentCamera")
 
 local FindFirstChild, FindFirstChildOfClass = __index(game, "FindFirstChild"), __index(game, "FindFirstChildOfClass")
 local WorldToViewportPoint = __index(Camera, "WorldToViewportPoint")
+local GetPartsObscuringTarget = __index(Camera, "GetPartsObscuringTarget")
 local GetMouseLocation = __index(UserInputService, "GetMouseLocation")
+local GetPlayers = __index(Players, "GetPlayers")
 
 --// Variables
 
@@ -58,10 +60,8 @@ end
 
 --// Checking for multiple processes
 
-do
-	if ExunysDeveloperAimbot then
-		ExunysDeveloperAimbot:Exit()
-	end
+if ExunysDeveloperAimbot then
+	ExunysDeveloperAimbot:Exit()
 end
 
 --// Environment
@@ -108,6 +108,7 @@ getgenv().ExunysDeveloperAimbot = {
 		LockedColor = Color3fromRGB(255, 150, 150)
 	},
 
+	Blacklisted = {},
 	FOVCircle = Drawingnew("Circle"),
 	FOVCircleOutline = Drawingnew("Circle")
 }
@@ -116,6 +117,19 @@ local Environment = getgenv().ExunysDeveloperAimbot
 
 --// Core Functions
 
+local FixUsername = function(String)
+	local Result
+
+	for _, Value in next, GetPlayers(Players) do
+		local Name = __index(Value, "Name")
+
+		if stringsub(stringlower(Name, 1, #String)) == stringlower(String) then
+			Result = Name
+		end
+	end
+
+	return Result
+end
 
 local GetRainbowColor = function()
 	local RainbowSpeed = Environment.DeveloperSettings.RainbowSpeed
@@ -147,11 +161,11 @@ local GetClosestPlayer = function()
 	if not Environment.Locked then
 		RequiredDistance = Environment.FOVSettings.Enabled and Environment.FOVSettings.Radius or 2000
 
-		for _, Value in next, Players.GetPlayers(Players) do
+		for _, Value in next, GetPlayers(Players) do
 			local Character = __index(Value, "Character")
 			local Humanoid = Character and FindFirstChildOfClass(Character, "Humanoid")
 
-			if Value ~= LocalPlayer and Character and FindFirstChild(Character, LockPart) and Humanoid then
+			if Value ~= LocalPlayer and tablefind(Environment.Blacklisted, __index(Value, "Name")) and Character and FindFirstChild(Character, LockPart) and Humanoid then
 				local PartPosition, TeamCheckOption = __index(Character[LockPart], "Position"), Environment.DeveloperSettings.TeamCheckOption
 
 				if Settings.TeamCheck and __index(Value, TeamCheckOption) == __index(LocalPlayer, TeamCheckOption) then
@@ -162,7 +176,7 @@ local GetClosestPlayer = function()
 					continue
 				end
 
-				if Settings.WallCheck and #(Camera:GetPartsObscuringTarget({PartPosition}, Character:GetDescendants())) > 0 then
+				if Settings.WallCheck and #(GetPartsObscuringTarget(Camera, {PartPosition}, Character:GetDescendants())) > 0 then
 					continue
 				end
 
@@ -288,24 +302,52 @@ end)
 
 --// Functions
 
-function Environment.Exit(self) -- METHOD | ExunysDeveloperAimbot:Exit()
+function Environment.Exit(self) -- METHOD | ExunysDeveloperAimbot:Exit(<void>)
+	assert(self, "EXUNYS_AIMBOT-V3.Exit: Missing parameter #1 \"self\" <table>.")
+
 	for Index, _ in next, ServiceConnections do
 		Disconnect(ServiceConnections[Index])
 	end
 
-	Load = nil; ConvertVector = nil; CancelLock = nil; GetClosestPlayer = nil; GetRainbowColor = nil
+	Load = nil; ConvertVector = nil; CancelLock = nil; GetClosestPlayer = nil; GetRainbowColor = nil; FixUsername = nil
 
 	self.FOVCircle:Remove()
 	self.FOVCircleOutline:Remove()
 	getgenv().ExunysDeveloperAimbot = nil
 end
 
-function Environment.Restart() -- ExunysDeveloperAimbot.Restart()
+function Environment.Restart() -- ExunysDeveloperAimbot.Restart(<void>)
 	for Index, _ in next, ServiceConnections do
 		Disconnect(ServiceConnections[Index])
 	end
 
 	Load()
+end
+
+function Environment.Blacklist(self, Username) -- METHOD | ExunysDeveloperAimbot:Blacklist(<string> Player Name)
+	assert(self, "EXUNYS_AIMBOT-V3.Blacklist: Missing parameter #1 \"self\" <table>.")
+	assert(Username, "EXUNYS_AIMBOT-V3.Blacklist: Missing parameter #2 \"Username\" <string>.")
+
+	Username = FixUsername(Username)
+
+	assert(self, "EXUNYS_AIMBOT-V3.Blacklist: User "..Username.." couldn't be found.")
+
+	self.Blacklisted[#self.Blacklisted + 1] = Username
+end
+
+function Environment.Whitelist(self, Username) -- METHOD | ExunysDeveloperAimbot:Whitelist(<string> Player Name)
+	assert(self, "EXUNYS_AIMBOT-V3.Whitelist: Missing parameter #1 \"self\" <table>.")
+	assert(Username, "EXUNYS_AIMBOT-V3.Whitelist: Missing parameter #2 \"Username\" <string>.")
+
+	Username = FixUsername(Username)
+
+	assert(Username, "EXUNYS_AIMBOT-V3.Whitelist: User "..Username.." couldn't be found.")
+	
+	local Index = tablefind(self.Blacklisted, Username)
+	
+	assert(Index, "EXUNYS_AIMBOT-V3.Whitelist: User "..Username.." is not blacklisted.")
+
+	self.Blacklisted[Index] = nil
 end
 
 Environment.Load = Load -- ExunysDeveloperAimbot.Load()
