@@ -83,6 +83,9 @@ getgenv().ExunysDeveloperAimbot = {
 		AliveCheck = true,
 		WallCheck = false,
 
+		OffsetToMoveDirection = false,
+		OffsetIncrement = 15, -- Min: 1; Max: 30
+
 		Sensitivity = 0, -- Animation length (in seconds) before fully locking onto target
 		Sensitivity2 = 3, -- mousemoverel Sensitivity
 
@@ -115,4 +118,22 @@ getgenv().ExunysDeveloperAimbot = {
 
 </details>
 
-### PREVIEWS & DOCUMENTATION SOON...
+<details> <summary> Previews </summary>
+
+### The video below shows how stable and strong the aim lock is and that It's perfect for HvH.
+
+https://github.com/Exunys/Aimbot-V3/assets/76539058/408a4c1e-39fc-4499-9e1d-41aabd4429a0
+
+### The videos below shows how smooth the aim lock is and that It's adjustable to assist for aiming in any type of game.
+
+https://github.com/Exunys/Aimbot-V3/assets/76539058/8238183a-1594-4ca4-a146-c55c0cf76106
+
+https://github.com/Exunys/Aimbot-V3/assets/76539058/b77fe625-aecc-41ed-9543-47460ca2703d
+
+### The video below shows how the `Blacklist` and `Whitelist` functions work.
+
+https://github.com/Exunys/Aimbot-V3/assets/76539058/5e202703-d86d-4563-af52-f757e43fde39
+
+</details>
+
+### GITBOOK  DOCUMENTATION SOON...
