@@ -33,7 +33,7 @@ This project has been written and tested with [Synapse X](https://x.synapse.to) 
 # 📋 Documentation
 
 ### The documentation for the interactive functions of this module can be found by clicking [here](https://exunys.gitbook.io/aimbot-v3-documentation/) or at the following link:
-### https://exunys.gitbook.io/exunys-esp-documentation/
+### https://exunys.gitbook.io/aimbot-v3-documentation/
 
 More detailed information for this project will be documented by time in this README.md document.
 
