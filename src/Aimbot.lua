@@ -9,8 +9,8 @@
 
 local game, workspace = game, workspace
 local getrawmetatable, getmetatable, setmetatable, pcall, getgenv, next, tick = getrawmetatable, getmetatable, setmetatable, pcall, getgenv, next, tick
-local Vector2new, CFramenew, Color3fromRGB, Color3fromHSV, Drawingnew, TweenInfonew = Vector2.new, CFrame.new, Color3.fromRGB, Color3.fromHSV, Drawing.new, TweenInfo.new
-local getupvalue, mousemoverel, tablefind, stringlower, stringsub = debug.getupvalue, mousemoverel or (Input and Input.MouseMove), table.find, string.lower, string.sub
+local Vector2new, Vector3new, Vector3zero, CFramenew, Color3fromRGB, Color3fromHSV, Drawingnew, TweenInfonew = Vector2.new, Vector3.new, Vector3.zero, CFrame.new, Color3.fromRGB, Color3.fromHSV, Drawing.new, TweenInfo.new
+local getupvalue, mousemoverel, tablefind, tableremove, stringlower, stringsub, mathclamp = debug.getupvalue, mousemoverel or (Input and Input.MouseMove), table.find, table.remove, string.lower, string.sub, math.clamp
 
 local GameMetatable = getrawmetatable(game)
 local __index = GameMetatable.__index
@@ -80,6 +80,9 @@ getgenv().ExunysDeveloperAimbot = {
 		AliveCheck = true,
 		WallCheck = false,
 
+        OffsetToMoveDirection = false,
+        OffsetVelocity = 15,
+
 		Sensitivity = 0, -- Animation length (in seconds) before fully locking onto target
 		Sensitivity2 = 3, -- mousemoverel Sensitivity
 
@@ -123,7 +126,7 @@ local FixUsername = function(String)
 	for _, Value in next, GetPlayers(Players) do
 		local Name = __index(Value, "Name")
 
-		if stringsub(stringlower(Name, 1, #String)) == stringlower(String) then
+		if stringsub(stringlower(Name), 1, #String) == stringlower(String) then
 			Result = Name
 		end
 	end
@@ -197,8 +200,8 @@ end
 local Load = function()
 	OriginalSensitivity = __index(UserInputService, "MouseDeltaSensitivity")
 
-	local Settings, FOVCircle, FOVCircleOutline, FOVSettings = Environment.Settings, Environment.FOVCircle, Environment.FOVCircleOutline, Environment.FOVSettings
-	local LockPart = Settings.LockPart
+	local Settings, FOVCircle, FOVCircleOutline, FOVSettings, Offset = Environment.Settings, Environment.FOVCircle, Environment.FOVCircleOutline, Environment.FOVSettings
+	local OffsetToMoveDirection, LockPart = Settings.OffsetToMoveDirection, Settings.LockPart
 
 	if not UWP then
 		FOVCircle, FOVCircleOutline = FOVCircle.__OBJECT, FOVCircleOutline.__OBJECT
@@ -234,9 +237,11 @@ local Load = function()
 		if Running and Settings.Enabled then
 			GetClosestPlayer()
 
+            Offset = OffsetToMoveDirection and __index(FindFirstChildOfClass(__index(Environment.Locked, "Character"), "Humanoid"), "MoveDirection") * (mathclamp(Settings.OffsetVelocity, 1, 30) / 10) or Vector3zero
+
 			if Environment.Locked then
 				local LockedPosition_Vector3 = __index(__index(Environment.Locked, "Character")[LockPart], "Position")
-				local LockedPosition = WorldToViewportPoint(Camera, LockedPosition_Vector3)
+				local LockedPosition = WorldToViewportPoint(Camera, LockedPosition_Vector3 + Offset)
 
 				if Environment.Settings.LockMode == 2 then
 					mousemoverel((LockedPosition.X - GetMouseLocation(UserInputService).X) * Settings.Sensitivity2, (LockedPosition.Y - GetMouseLocation(UserInputService).Y) * Settings.Sensitivity2)
@@ -245,7 +250,7 @@ local Load = function()
 						Animation = TweenService:Create(Camera, TweenInfonew(Environment.Settings.Sensitivity, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {CFrame = CFramenew(Camera.CFrame.Position, LockedPosition_Vector3)})
 						Animation:Play()
 					else
-						__newindex(Camera, "CFrame", CFramenew(Camera.CFrame.Position, LockedPosition_Vector3))
+						__newindex(Camera, "CFrame", CFramenew(Camera.CFrame.Position, LockedPosition_Vector3 + Offset))
 					end
 
 					__newindex(UserInputService, "MouseDeltaSensitivity", 0)
@@ -342,12 +347,12 @@ function Environment.Whitelist(self, Username) -- METHOD | ExunysDeveloperAimbot
 	Username = FixUsername(Username)
 
 	assert(Username, "EXUNYS_AIMBOT-V3.Whitelist: User "..Username.." couldn't be found.")
-	
+
 	local Index = tablefind(self.Blacklisted, Username)
-	
+
 	assert(Index, "EXUNYS_AIMBOT-V3.Whitelist: User "..Username.." is not blacklisted.")
 
-	self.Blacklisted[Index] = nil
+	tableremove(self.Blacklisted, Index)
 end
 
 Environment.Load = Load -- ExunysDeveloperAimbot.Load()
