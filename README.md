@@ -6,6 +6,8 @@ This project's source is optimized, organized and simplified to the maximal leve
 
 This project is in beta testing, feel free to create pull requests (you will get credited), issues or just contact me on any of my linked platforms.
 
+This module is used in [AirHub V2](https://github.com/Exunys/AirHub-V2), if you want to use it to exploit for personal use instead of embedding for development purposes, I recommend you use AirHub.
+
 ### 📜 License
 This project is completely free and open sourced. But, that does not mean you own rights to it. Read this [document](https://github.com/Exunys/Aimbot-V3/blob/main/LICENSE) for more information.
 You can re-use / stitch this script or any system of this project into any of your repositories, as long as you credit the developer [Exunys](https://github.com/Exunys).
