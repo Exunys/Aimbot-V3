@@ -137,5 +137,3 @@ https://github.com/Exunys/Aimbot-V3/assets/76539058/b77fe625-aecc-41ed-9543-4746
 https://github.com/Exunys/Aimbot-V3/assets/76539058/5e202703-d86d-4563-af52-f757e43fde39
 
 </details>
-
-### GITBOOK DOCUMENTATION & MORE INFORMATION SOON...
