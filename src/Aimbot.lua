@@ -8,7 +8,7 @@
 --// Cache
 
 local game, workspace = game, workspace
-local getrawmetatable, getmetatable, setmetatable, pcall, getgenv, next, tick = getrawmetatable, getmetatable, setmetatable, pcall, getgenv, next, tick
+local getrawmetatable, getmetatable, setmetatable, pcall, getgenv, next, tick, select = getrawmetatable, getmetatable, setmetatable, pcall, getgenv, next, tick, select
 local Vector2new, Vector3new, Vector3zero, CFramenew, Color3fromRGB, Color3fromHSV, Drawingnew, TweenInfonew = Vector2.new, Vector3.new, Vector3.zero, CFrame.new, Color3.fromRGB, Color3.fromHSV, Drawing.new, TweenInfo.new
 local getupvalue, mousemoverel, tablefind, tableremove, stringlower, stringsub, mathclamp = debug.getupvalue, mousemoverel or (Input and Input.MouseMove), table.find, table.remove, string.lower, string.sub, math.clamp
 
@@ -16,6 +16,16 @@ local GameMetatable = getrawmetatable(game)
 local __index = GameMetatable.__index
 local __newindex = GameMetatable.__newindex
 local GetService = __index(game, "GetService")
+
+-- Degrade "__index" and "__newindex" functions if the executor doesn't support "getrawmetatable" properly.
+
+if select(2, pcall(__index, Players, "LocalPlayer")) then
+	__index, __newindex = function(Object, Key)
+		return Object[Key]
+	end, function(Object, Key, Value)
+		Object[Key] = Value
+	end
+end
 
 --// Services & Functions
 
