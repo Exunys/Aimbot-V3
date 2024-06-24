@@ -1,6 +1,6 @@
 --[[
 
-	Universal Aimbot Module by Exunys © CC0 1.0 Universal (2023)
+	Universal Aimbot Module by Exunys © CC0 1.0 Universal (2023 - 2024)
 	https://github.com/Exunys
 
 ]]
@@ -127,6 +127,9 @@ getgenv().ExunysDeveloperAimbot = {
 }
 
 local Environment = getgenv().ExunysDeveloperAimbot
+
+SetRenderProperty(Environment.FOVCircle, "Visible", false)
+SetRenderProperty(Environment.FOVCircleOutline, "Visible", false)
 
 --// Core Functions
 
