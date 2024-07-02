@@ -85,11 +85,11 @@ getgenv().ExunysDeveloperAimbot = {
 		AliveCheck = true,
 		WallCheck = false,
 
-		OffsetToMoveDirection = false,
-		OffsetIncrement = 15, -- Min: 1; Max: 30
+		OffsetToMoveDirection = false, -- Prediction
+		OffsetIncrement = 15, -- Min: 1; Max: 30 -- Amplitude
 
-		Sensitivity = 0, -- Animation length (in seconds) before fully locking onto target
-		Sensitivity2 = 3, -- mousemoverel Sensitivity
+		Sensitivity = 0, -- Animation length (in seconds) before fully locking onto target / CFrame Sensitivity
+		Sensitivity2 = 3.5, -- mousemoverel Sensitivity
 
 		LockMode = 1, -- 1 = CFrame; 2 = mousemoverel
 		LockPart = "Head", -- Body part to lock on
