@@ -17,9 +17,20 @@ local __index = GameMetatable.__index
 local __newindex = GameMetatable.__newindex
 local GetService = __index(game, "GetService")
 
--- Degrade "__index" and "__newindex" functions if the executor doesn't support "getrawmetatable" properly.
+--// Services
+
+local RunService = GetService(game, "RunService")
+local UserInputService = GetService(game, "UserInputService")
+local TweenService = GetService(game, "TweenService")
+local Players = GetService(game, "Players")
+
+--// Degrade "__index" and "__newindex" functions if the executor doesn't support "getrawmetatable" properly.
+
+local ReciprocalRelativeSensitivity = false
 
 if select(2, pcall(__index, Players, "LocalPlayer")) then
+	ReciprocalRelativeSensitivity = true
+
 	__index, __newindex = function(Object, Key)
 		return Object[Key]
 	end, function(Object, Key, Value)
@@ -27,12 +38,8 @@ if select(2, pcall(__index, Players, "LocalPlayer")) then
 	end
 end
 
---// Services & Functions
+--// Service Methods
 
-local RunService = GetService(game, "RunService")
-local UserInputService = GetService(game, "UserInputService")
-local TweenService = GetService(game, "TweenService")
-local Players = GetService(game, "Players")
 local LocalPlayer = __index(Players, "LocalPlayer")
 local Camera = __index(workspace, "CurrentCamera")
 
@@ -94,7 +101,7 @@ getgenv().ExunysDeveloperAimbot = {
 		OffsetIncrement = 15,
 
 		Sensitivity = 0, -- Animation length (in seconds) before fully locking onto target
-		Sensitivity2 = 3, -- mousemoverel Sensitivity
+		Sensitivity2 = 3.5, -- mousemoverel Sensitivity
 
 		LockMode = 1, -- 1 = CFrame; 2 = mousemoverel
 		LockPart = "Head", -- Body part to lock on
@@ -256,8 +263,10 @@ local Load = function()
 				local LockedPosition_Vector3 = __index(__index(Environment.Locked, "Character")[LockPart], "Position")
 				local LockedPosition = WorldToViewportPoint(Camera, LockedPosition_Vector3 + Offset)
 
+				local RelativeSensitivity = ReciprocalRelativeSensitivity and (1 / Settings.Sensitivity2) or Settings.Sensitivity2
+
 				if Environment.Settings.LockMode == 2 then
-					mousemoverel((LockedPosition.X - GetMouseLocation(UserInputService).X) * Settings.Sensitivity2, (LockedPosition.Y - GetMouseLocation(UserInputService).Y) * Settings.Sensitivity2)
+					mousemoverel((LockedPosition.X - GetMouseLocation(UserInputService).X) * RelativeSensitivity, (LockedPosition.Y - GetMouseLocation(UserInputService).Y) * RelativeSensitivity)
 				else
 					if Settings.Sensitivity > 0 then
 						Animation = TweenService:Create(Camera, TweenInfonew(Environment.Settings.Sensitivity, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {CFrame = CFramenew(Camera.CFrame.Position, LockedPosition_Vector3)})
