@@ -1,19 +1,19 @@
 # ☄️ Aimbot V3 [![Visitors](https://visitor-badge.laobi.icu/badge?page_id=Exunys.Aimbot-V3)](https://exunys.gitbook.io/aimbot-v3-documentation)
 
-This project is a universal aim-locking module. Works on all games which use the default character. This version has a couple of improvements from [Aimbot V2](https://github.com/Exunys/Aimbot-V2), one of the most important ones are optimization and a bunch of rewritten parts for maximal efficiency.
+This project is a universal aim-locking module that works with all games using the default character. This version includes several improvements over [Aimbot V2](https://github.com/Exunys/Aimbot-V2), with key enhancements being optimization and numerous rewritten parts for maximum efficiency.
 
-This project's source is optimized, organized and simplified to the maximal level to be executive, fast, stable and precise.
+The source of this project is optimized, organized, and simplified to the highest level to ensure it is efficient, fast, stable, and precise.
 
-This project is in beta testing, feel free to create pull requests (you will get credited), issues or just contact me on any of my linked platforms.
+This project is currently in beta testing. Feel free to create pull requests (you will be credited), report issues, or contact me through any of my linked platforms.
 
-This module is used in [AirHub V2](https://github.com/Exunys/AirHub-V2), if you want to use it to exploit for personal use instead of embedding for development purposes, I recommend you use AirHub.
+This module is used in [AirHub V2](https://github.com/Exunys/AirHub-V2). If you want to use it personally rather than to embed it for development purposes, I recommend using AirHub.
 
 ### 📜 License
-This project is completely free and open sourced. But, that does not mean you own rights to it. Read this [document](https://github.com/Exunys/Aimbot-V3/blob/main/LICENSE) for more information.
-You can re-use / stitch this script or any system of this project into any of your repositories, as long as you credit the developer [Exunys](https://github.com/Exunys).
+This project is completely free and open source. However, that does not mean you own the rights to it. Please read this [document](https://github.com/Exunys/Aimbot-V3/blob/main/LICENSE) for more information.
+You can reuse or integrate this script or any system from this project into your own repositories, as long as you credit the developer, [Exunys](https://github.com/Exunys) (me).
 
 ### ❗ Notice
-This project has been written and tested with [Synapse X](https://x.synapse.to) and [Electron](https://ryos.lol) however, I will attempt my best to modulize support for every exploit. So far, the required functions for this module to run will be listed below:
+This project has been written and tested with Synapse X and Electron. However, I will do my best to modularize support for every exploit. So far, the required functions for this module to run are listed below:
 
 <details> <summary> Dependencies (required functions & libraries): </summary>
 
@@ -37,7 +37,7 @@ This project has been written and tested with [Synapse X](https://x.synapse.to) 
 ### The documentation for the interactive functions of this module can be found by clicking [here](https://exunys.gitbook.io/aimbot-v3-documentation/) or at the following link:
 ### https://exunys.gitbook.io/aimbot-v3-documentation/
 
-More detailed information for this project will be documented by time in this README.md document.
+More detailed information for this project will be documented by time in this README.md document but mostly on the gitbook page.
 
 # 👋 Introduction
 
