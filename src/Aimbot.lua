@@ -235,7 +235,6 @@ local Load = function()
 	OriginalSensitivity = __index(UserInputService, "MouseDeltaSensitivity")
 
 	local Settings, FOVCircle, FOVCircleOutline, FOVSettings, Offset = Environment.Settings, Environment.FOVCircle, Environment.FOVCircleOutline, Environment.FOVSettings
-	local OffsetToMoveDirection, LockPart = Settings.OffsetToMoveDirection, Settings.LockPart
 
 	if not Degrade then
 		FOVCircle, FOVCircleOutline = FOVCircle.__OBJECT, FOVCircleOutline.__OBJECT
@@ -245,6 +244,8 @@ local Load = function()
 	SetRenderProperty(FOVCircleOutline, "ZIndex", 1)
 
 	ServiceConnections.RenderSteppedConnection = Connect(__index(RunService, Environment.DeveloperSettings.UpdateMode), function()
+		local OffsetToMoveDirection, LockPart = Settings.OffsetToMoveDirection, Settings.LockPart
+
 		if FOVSettings.Enabled and Settings.Enabled then
 			for Index, Value in next, FOVSettings do
 				if Index == "Color" then
