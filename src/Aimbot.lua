@@ -20,7 +20,7 @@ end}
 
 local __index = GameMetatable.__index
 local __newindex = GameMetatable.__newindex
-local GetService = __index(game, "GetService")
+local GetService = select(2, pcall(__index, game, "GetService")) or game.GetService
 
 --// Services
 
