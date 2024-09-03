@@ -6,7 +6,7 @@ The source of this project is optimized, organized, and simplified to the highes
 
 This project is currently in beta testing. Feel free to create pull requests (you will be credited), report issues, or contact me through any of my linked platforms.
 
-This module is used in [AirHub V2](https://github.com/Exunys/AirHub-V2). If you want to use it personally rather than to embed it for development purposes, I recommend using AirHub.
+This module is used in [AirHub V2](https://github.com/Exunys/AirHub-V2). If you want to use it personally instead of integrating it for development purposes, I recommend using AirHub.
 
 ### 📜 License
 This project is completely free and open source. However, that does not mean you own the rights to it. Please read this [document](https://github.com/Exunys/Aimbot-V3/blob/main/LICENSE) for more information.
@@ -34,8 +34,7 @@ This project has been written and tested with Synapse X and Electron. However, I
 
 # 📋 Documentation
 
-### The documentation for the interactive functions of this module can be found by clicking [here](https://exunys.gitbook.io/aimbot-v3-documentation/) or at the following link:
-### https://exunys.gitbook.io/aimbot-v3-documentation/
+### The documentation for the interactive methods of this module can be found by clicking [here](https://exunys.gitbook.io/aimbot-v3-documentation/).
 
 More detailed information for this project will be documented by time in this README.md document but mostly on the gitbook page.
 
@@ -49,7 +48,7 @@ Aimbot.Load()
 
 The code above loads the module's environment in your script executor's global environment meaning it will be achivable across every script.
 
-The identificator for the environment is `ExunysDeveloperAimbot` which is a table that has configurable settings and interactive user functions.
+The identificator for the environment is `ExunysDeveloperAimbot` which is a table that has configurable settings and interactive methods.
 
 The table loaded into the exploit's global environment by the module has a [*metatable*](https://create.roblox.com/docs/scripting/luau/metatables) set to it with a **__call** metamethod, meaning you can call the table which would load the Aimbot.
 
@@ -61,14 +60,14 @@ or
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Aimbot-V3/main/src/Aimbot.lua"))()
 ExunysDeveloperAimbot()
 ```
-This is equivalent to the `Load` function (which would be more optimized and faster).
+This is equivalent to the `Load` method, which is a faster alternative for loading the module.
 ```lua
 ExunysDeveloperAimbot.Load()
 ```
 
 This module has customizable settings and other miscellaneous properties. You can see the configurable settings below.
 
-<details> <summary> The script's configurable settings </summary>
+<details> <summary> The module's configurable settings </summary>
 
 ```lua
 getgenv().ExunysDeveloperAimbot = {
@@ -122,17 +121,17 @@ getgenv().ExunysDeveloperAimbot = {
 
 <details> <summary> Previews </summary>
 
-### The video below shows how stable and strong the aim lock is and that It's perfect for HvH.
+### The video below showcases the stability and strength of the aim lock and how its perfect for HvH scenarios.
 
 https://github.com/Exunys/Aimbot-V3/assets/76539058/408a4c1e-39fc-4499-9e1d-41aabd4429a0
 
-### The videos below shows how smooth the aim lock is and that It's adjustable to assist for aiming in any type of game.
+### The videos below showcases the smoothness of the aim lock and its adjustable style engineered to assist for aiming in any type of game.
 
 https://github.com/Exunys/Aimbot-V3/assets/76539058/8238183a-1594-4ca4-a146-c55c0cf76106
 
 https://github.com/Exunys/Aimbot-V3/assets/76539058/b77fe625-aecc-41ed-9543-47460ca2703d
 
-### The video below shows how the `Blacklist` and `Whitelist` functions work.
+### The video below showcases the `Blacklist` and `Whitelist` methods.
 
 https://github.com/Exunys/Aimbot-V3/assets/76539058/5e202703-d86d-4563-af52-f757e43fde39
 
