@@ -117,6 +117,13 @@ getgenv().ExunysDeveloperAimbot = {
 }
 ```
 
+### NOTE: Do not execute this code, it is attached here as an example, executing this would rewrite the environment and critical core data for the aimbot to function. Instead if you want to change some setting make sure you use the example below:
+
+```lua
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Aimbot-V3/main/src/Aimbot.lua"))()
+ExunysDeveloperAimbot.Settings.Enabled = false
+```
+
 </details>
 
 <details> <summary> Previews </summary>
