@@ -107,7 +107,7 @@ getgenv().ExunysDeveloperAimbot = {
 		Sensitivity2 = 3.5, -- mousemoverel Sensitivity
 
 		LockMode = 1, -- 1 = CFrame; 2 = mousemoverel
-		LockPart = "Head", -- Body part to lock on
+		LockPart = "HumanoidRootPart", -- Body part to lock on
 
 		TriggerKey = Enum.UserInputType.MouseButton2,
 		Toggle = false
@@ -124,7 +124,7 @@ getgenv().ExunysDeveloperAimbot = {
 		Transparency = 1,
 		Filled = false,
 
-		RainbowColor = false,
+		RainbowColor = true,
 		RainbowOutlineColor = false,
 		Color = Color3fromRGB(255, 255, 255),
 		OutlineColor = Color3fromRGB(0, 0, 0),
