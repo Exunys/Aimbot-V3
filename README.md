@@ -74,7 +74,8 @@ getgenv().ExunysDeveloperAimbot = {
 	DeveloperSettings = {
 		UpdateMode = "RenderStepped",
 		TeamCheckOption = "TeamColor",
-		RainbowSpeed = 1 -- Bigger = Slower
+		RainbowSpeed = 1, -- Bigger = Slower
+		DisableWarnings = false
 	},
 
 	Settings = {
@@ -84,24 +85,45 @@ getgenv().ExunysDeveloperAimbot = {
 		AliveCheck = true,
 		WallCheck = false,
 
-		OffsetToMoveDirection = false, -- Prediction
-		OffsetIncrement = 15, -- Min: 1; Max: 30 -- Amplitude
+		OffsetToMoveDirection = false,
+		OffsetIncrement = 15,
 
-		Sensitivity = 0, -- Animation length (in seconds) before fully locking onto target / CFrame Sensitivity
-		Sensitivity2 = 3.5, -- mousemoverel Sensitivity
+		Sensitivity = 0, -- Animation length (in seconds) before fully locking onto target
+		Sensitivity2 = 1, -- mousemoverel Sensitivity
 
-		LockMode = 1, -- 1 = CFrame; 2 = mousemoverel
+		LockMode = 1, -- 1 = CFrame; 2 = mousemoverel; 3 = mousemoveabs
 		LockPart = "Head", -- Body part to lock on
 
 		TriggerKey = Enum.UserInputType.MouseButton2,
 		Toggle = false
 	},
 
+	Triggerbot = {
+		Enabled = false,
+
+		TeamCheck = false,
+		AliveCheck = true,
+		AimLockedCheck = false,
+
+		Delay = 0 -- Time it takes for the trigger bot to react / click (seconds).
+	},
+
+	ClosestPlayerTracer = {
+		Enabled = true,
+		Position = 3, -- 1 = Bottom; 2 = Center; 3 = Mouse
+
+		Transparency = 0.5,
+		Thickness = 1,
+
+		RainbowColor = false,
+		Color = Color3.fromRGB(150, 150, 255)
+	},
+
 	FOVSettings = {
 		Enabled = true,
 		Visible = true,
 
-		Radius = 90, -- Field Of View
+		Radius = 180,
 		NumSides = 60,
 
 		Thickness = 1,
