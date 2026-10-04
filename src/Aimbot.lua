@@ -20,7 +20,7 @@ local game, workspace = game, workspace
 local getrawmetatable, pcall, next, tick, getgenv = getrawmetatable, pcall, next, tick, getgenv
 local Vector2new, Vector3zero, CFramenew, Color3fromRGB, Color3fromHSV, Drawingnew, TweenInfonew = Vector2.new, Vector3.zero, CFrame.new, Color3.fromRGB, Color3.fromHSV, Drawing and Drawing.new, TweenInfo.new
 local mousemoverel, mousemoveabs, tablefind, tableremove, stringlower, stringsub, mathclamp = mousemoverel or (Input and Input.MouseMove), mousemoveabs, table.find, table.remove, string.lower, string.sub, math.clamp
-local mouse1press, mouse1release, taskwait = mouse1press, mouse1release, task.wait
+local mouse1press, mouse1release, mouse1click, taskwait = mouse1press, mouse1release, mouse1click, task.wait
 local clonefunction, cloneref = clonefunction or LPH_NO_VIRTUALIZE(function(...)
 	return ...
 end), cloneref or LPH_NO_VIRTUALIZE(function(...)
@@ -294,7 +294,7 @@ local Load = function()
 						taskwait(Triggerbot.Delay)
 					end
 
-					mouse1press(); taskwait(0); mouse1release()
+					mouse1press(); __index(RunService, UpdateMode):Wait(); mouse1release(); mouse1click(); __index(RunService, UpdateMode):Wait()
 				end
 			end
 		end))
